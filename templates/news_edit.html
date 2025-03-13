@@ -1,0 +1,12 @@
+{% extends 'flatpages/default.html' %}
+{% block content %}
+  <h1>Редактировать новость: {{ object.title }}</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Сохранить изменения</button>
+  </form>
+
+  <a href="{% url 'post_detail' object.pk %}">Отмена</a>
+{% endblock %}

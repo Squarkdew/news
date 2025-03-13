@@ -17,6 +17,9 @@ News
                <td>Название</td>
                <td>Дата</td>
                <td>Текст</td>
+               <td>Категория</td>
+
+               
              
            </tr>
           
@@ -33,6 +36,8 @@ News
                <td>{{ post.title|censor }}</td>
                <td>{{ post.created_at|date:'d M Y' }}</td>
                <td>{{ post.content|truncatewords:20|censor }}</td>
+               <td>{{ post.post_type}}</td>
+
            </tr>
            {% endfor %}
 
