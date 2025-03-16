@@ -79,7 +79,7 @@ class ArticleUpdateView(UpdateView):
     template_name = 'article_edit.html'
     form_class = PostForm
 
-    def get_success_url(self):
+    def get_success_url(self): 
         return reverse_lazy('post_detail', kwargs={'pk': self.object.pk})
     
 class NewsDeleteView(DeleteView):
