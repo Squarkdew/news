@@ -1,6 +1,6 @@
 from django.urls import path, include
 # Импортируем созданное нами представление
-from .views import PostsList, PostDetail, PostsSearch, NewsCreateView, ArticleCreateView, NewsDeleteView, NewsUpdateView, ArticleDeleteView, ArticleUpdateView
+from .views import CategoryView, SubscribeView, PostsList, PostDetail, PostsSearch, NewsCreateView, ArticleCreateView, NewsDeleteView, NewsUpdateView, ArticleDeleteView, ArticleUpdateView
 
 
 urlpatterns = [
@@ -12,6 +12,10 @@ urlpatterns = [
    # Для этого вызываем метод as_view.
     path('news/', PostsList.as_view(),name='posts_list'), 
     path('', include('protect.urls')),
+
+
+    path('category/<int:pk>/', CategoryView.as_view(), name='category_list'),
+    path('category/<int:pk>/subscribe/', SubscribeView.as_view(), name='category_subscribe'),
 
     path('sign/', include('sign.urls')),
  

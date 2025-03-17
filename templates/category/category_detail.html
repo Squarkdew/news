@@ -1,0 +1,23 @@
+{% extends 'flatpages/default.html' %}
+
+
+
+{% block content %}
+
+<h1>{{ category.name }}</h1>
+
+{% if user.is_authenticated %}
+
+    <form method="post" action="{% url 'category_subscribe' category.pk %}">
+        {% csrf_token %}
+        {% if user in category.subscribers.all %}
+            <button type="submit">Отписаться от категории</button>
+        {% else %}
+            <button type="submit">Подписаться на категорию</button>
+        {% endif %}
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Войдите</a>, чтобы подписаться на категорию.</p>
+{% endif %}
+
+{% endblock content %}
