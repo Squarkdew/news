@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Недельная подборка новостей</title>
+</head>
+<body>
+    <h2>Здравствуйте, {{ user.username }}!</h2>
+    <p>Вот последние новости в категории, на которую вы подписаны:</p>
+    
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{{ post.get_absolute_url }}">{{ post.title }}</a> ({{ post.created_at|date:"d.m.Y" }})
+            </li>
+        {% endfor %}
+    </ul>
+
+
+</body>
+</html>

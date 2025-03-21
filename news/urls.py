@@ -18,6 +18,8 @@ urlpatterns = [
     path('category/<int:pk>/subscribe/', SubscribeView.as_view(), name='category_subscribe'),
 
     path('sign/', include('sign.urls')),
+
+
  
     path('news/<int:pk>', PostDetail.as_view(),name='post_detail'),
     path('news/search/', PostsSearch.as_view(), name='post_search'),
