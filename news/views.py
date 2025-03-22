@@ -43,7 +43,7 @@ class NewsCreateView(CreateView):
     model = Post
     form_class = PostForm
     template_name = 'news_create.html'
-    success_url = reverse_lazy('posts_list')  # куда перейти после создания
+    success_url = reverse_lazy('posts_list') 
 
     def form_valid(self, form):
         post = form.save(commit=False)
@@ -120,4 +120,6 @@ class CategoryView(DetailView):
     model = Category
     template_name = 'category/category_detail.html'
     context_object_name = 'category'
+
+
 
