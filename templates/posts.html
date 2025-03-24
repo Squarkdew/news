@@ -33,9 +33,9 @@ News
                 от переменных в Python. Здесь также можно получать доступ к
                 полям объекта модели. Например, здесь мы выводим имя,
                 в следующем столбце описание, и т.д.  -->
-               <td>{{ post.title|censor }}</td>
+               <td>{{ post.title }}</td>
                <td>{{ post.created_at|date:'d M Y' }}</td>
-               <td>{{ post.content|truncatewords:20|censor }}</td>
+               <td>{{ post.content|truncatechars:50 }}</td>
                <td>{{ post.post_type}}</td>
 
            </tr>

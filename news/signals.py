@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from django.utils.timezone import now
 from .models import Post
 from django.db.models.signals import m2m_changed
+from news.tasks import send_post_notification
 
 @receiver(pre_save, sender=Post)
 def check_daily_limit(sender, instance, **kwargs):
@@ -25,21 +26,4 @@ def check_daily_limit(sender, instance, **kwargs):
 @receiver(m2m_changed, sender=Post.categories.through)
 def notify_subscribers(sender, instance, action, **kwargs):
     if action == "post_add":  
-        subscribers = set()
-
-        for category in instance.categories.all():
-            subscribers.update(category.subscribers.all())  
-
-        if subscribers:
-            subject = f"Новая публикация: {instance.title}"
-            html_content = render_to_string("email_notification.html", {"post": instance})
-
-            for user in subscribers:
-                msg = EmailMultiAlternatives(
-                    subject=subject,
-                    body='',
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    to=[user.email],
-                )
-                msg.attach_alternative(html_content, "text/html")
-                msg.send()
+        send_post_notification.delay(instance.id)

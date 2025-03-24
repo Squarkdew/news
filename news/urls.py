@@ -1,6 +1,7 @@
 from django.urls import path, include
 from .views import CategoryView, SubscribeView, PostsList, PostDetail, PostsSearch, NewsCreateView, ArticleCreateView, NewsDeleteView, NewsUpdateView, ArticleDeleteView, ArticleUpdateView
 
+from django.views.decorators.cache import cache_page
 
 urlpatterns = [
  

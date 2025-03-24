@@ -8,7 +8,7 @@ from django.conf import settings
 def send_welcome_email(sender, instance, created, **kwargs):
     if created:  # Проверяем, что пользователь создан
         subject = "Добро пожаловать на наш сайт!"
-        message = f"Привет, {instance.username}!\n\nСпасибо за регистрацию на нашем сайте."
+        message = f"Привет, {instance.first_name}!\n\nСпасибо за регистрацию на нашем сайте."
         send_mail(
             subject,
             message,

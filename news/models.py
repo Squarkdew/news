@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.cache import cache
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -49,11 +50,13 @@ class Post(models.Model):
 
     def preview(self):
         return self.content[:124]+'...' if len(self.content) > 124 else self.content
-    
-   
 
     def __str__(self):
         return f'{self.title.title()}: {self.content[:20]}'
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs) # сначала вызываем метод родителя, чтобы объект сохранился
+        cache.delete(f'product-{self.pk}') # затем удаляем его из кэша, чтобы сбросить его
 
 
 
